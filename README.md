@@ -1,8 +1,7 @@
 # MyReads Project
 
 This project was developed to fulfill the final assessment project for Udacity's React
-Fundamentals course.  A starter template was provided which included a static example of the CSS and HTML markup which is being used for this project. However the starter template did not include any of the React code needed to complete the project. The required interactivity to the app has been developed and added by refactoring the static code.
-
+Fundamentals course.  A starter template was provided which included a static example of the CSS and HTML markup which is being used for this project. However the starter template did not include any of the React Components needed to complete the project. The required interactivity to the app has been developed and added by refactoring the static code.
 
 
 ## Installation Instructions
