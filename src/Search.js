@@ -48,7 +48,7 @@ class Search extends Component{
   }
 
   getEndResults(books){
-    if(this.state.query.length > 2){
+    //if(this.state.query.length > 2){
       let rbs = this.props.books //reserved collection from MyReads / shelves
       let q = this.state.query
 
@@ -57,22 +57,22 @@ class Search extends Component{
         this.checkAuthors(book.authors, q.toLowerCase())
       )
       let results = filterMyReads
-
-      if(books !== undefined){
+      console.log(JSON.stringify(books))
+      
+      if(books !== undefined && !books.hasOwnProperty("error")){ //Is the book obj VALID??
         //merge the MyReads collection with the search results
         filterMyReads.forEach((rBook) => {
           let found = false
-          books.forEach((book)=>{
-            if(rBook.id === book.id){
-              found = true
-              book.shelf = rBook.shelf // add the shelf value
+            books.forEach((book)=>{
+              if(rBook.id === book.id){
+                found = true
+                book.shelf = rBook.shelf // add the shelf value
+              }
+            })
+            if(!found){
+              books.unshift(rBook) //add the book in personal collection to search results
             }
-          })
-          if(!found){
-            books.unshift(rBook) //add the book in personal collection to search results
-          }
         })
-
          results = books
       }
       //console.log(results.hasOwnProperty("error"))
@@ -81,7 +81,7 @@ class Search extends Component{
       }
       return results
     }
-  }
+  //}
 
   render(){
     const { query, results } = this.state
