@@ -48,30 +48,28 @@ class Search extends Component{
   }
 
   getEndResults(books){
-    //if(this.state.query.length > 2){
-      let rbs = this.props.books //reserved collection from MyReads / shelves
-      let q = this.state.query
+    let rbs = this.props.books //reserved collection from MyReads / shelves
+    let q = this.state.query
 
-      let filterMyReads = rbs.filter(book => //eliminate books that don't match the query
-        book.title.toLowerCase().includes(q.toLowerCase()) ||
-        this.checkAuthors(book.authors, q.toLowerCase())
-      )
-      let results = filterMyReads
-      console.log(JSON.stringify(books))
-      
-      if(books !== undefined && !books.hasOwnProperty("error")){ //Is the book obj VALID??
-        //merge the MyReads collection with the search results
-        filterMyReads.forEach((rBook) => {
-          let found = false
-            books.forEach((book)=>{
-              if(rBook.id === book.id){
-                found = true
-                book.shelf = rBook.shelf // add the shelf value
-              }
-            })
-            if(!found){
-              books.unshift(rBook) //add the book in personal collection to search results
+    let filterMyReads = rbs.filter(book => //eliminate books that don't match the query
+      book.title.toLowerCase().includes(q.toLowerCase()) ||
+      this.checkAuthors(book.authors, q.toLowerCase())
+    )
+    let results = filterMyReads
+
+    if(books !== undefined && !books.hasOwnProperty("error")){ //Is the book obj VALID??
+      //merge the MyReads collection with the search results
+      filterMyReads.forEach((rBook) => {
+        let found = false
+          books.forEach((book)=>{
+            if(rBook.id === book.id){
+              found = true
+              book.shelf = rBook.shelf // add the shelf value
             }
+          })
+          if(!found){
+            books.unshift(rBook) //add the book in personal collection to search results
+          }
         })
          results = books
       }
@@ -80,8 +78,7 @@ class Search extends Component{
         results = []
       }
       return results
-    }
-  //}
+  }
 
   render(){
     const { query, results } = this.state
