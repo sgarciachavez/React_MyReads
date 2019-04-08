@@ -16,7 +16,7 @@ class Search extends Component{
 
   refreshResults = () => {
 
-    BooksAPI.search(this.state.query,10)
+    BooksAPI.search(this.state.query,20)
       .then((books) => {
         if(this.state.query === ''){
           this.setState({hits: []})
