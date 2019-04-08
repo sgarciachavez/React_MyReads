@@ -14,9 +14,7 @@ class Book extends Component{
       const {book,id,refreshShelves} = this.props
       //let thumbnail = `url("${book.imageLinks.thumbnail}")`
       const thumbnail = this.getImageUrl()
-
-      console.log(JSON.stringify(book.imageLinks))
-      let authors = book.authors ? book.authors.join(', ') : "Author Unknown"
+      const authors = book.authors ? book.authors.join(', ') : "Author Unknown"
 
     return(
       <li>
