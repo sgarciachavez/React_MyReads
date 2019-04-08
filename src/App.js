@@ -27,7 +27,7 @@ class BooksApp extends React.Component {
   //refreshShelves is a function passed to:
   //BookCase => BookShelf => Book => ChangeShelf
   //    AND  Also to...
-  //Shelf => Book => ChangeShelf
+  //Search => Book => ChangeShelf
   //Unlimitely used in ChangeShelf ONLY
   refreshShelves = () => {
     this.setState(() => ({

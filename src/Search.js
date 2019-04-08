@@ -4,37 +4,24 @@ import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      query: '',
-      results: []
-    }
-    this.getEndResults = this.getEndResults.bind(this)
-    this.checkAuthors = this.checkAuthors.bind(this)
+  state = {
+    query: '',
+    hits: []
   }
 
   updateQuery = (query) => {
-
-    this.setState(() => ({
-      query: query
-    }))
-
-    this.refreshResults()
+    this.setState({query: query}) //update this.state.query
+    this.refreshResults() //getBooks from BooksAPI
   }
 
   refreshResults = () => {
-    const query = this.state.query
-    BooksAPI.search(query,10)
+
+    BooksAPI.search(this.state.query,10)
       .then((books) => {
         if(this.state.query === ''){
-          this.setState(() => ({
-            results: []
-          }))
+          this.setState({hits: []})
         }else{
-            this.setState(() => ({
-              results: this.getEndResults(books)
-            }))
+            this.setState({hits: this.getEndResults(books)})
         }
       })
   }
@@ -44,21 +31,21 @@ class Search extends Component{
       author.toLowerCase().includes(q)
     )
 
-    return filtered.length > 0
+    return filtered.length > 0 //returns a boolean
   }
 
   getEndResults(books){
     let rbs = this.props.books //reserved collection from MyReads / shelves
     let q = this.state.query
 
-    let filterMyReads = rbs.filter(book => //eliminate books that don't match the query
+    let filterMyReads = rbs.filter(book => //eliminate books that don't match the query from MyReads
       book.title.toLowerCase().includes(q.toLowerCase()) ||
       this.checkAuthors(book.authors, q.toLowerCase())
     )
     let results = filterMyReads
 
-    if(books !== undefined && !books.hasOwnProperty("error")){ //Is the book obj VALID??
-      //merge the MyReads collection with the search results
+    if(books !== undefined && !books.hasOwnProperty("error")){ //Is the books obj VALID??
+      //merge the filtered MyReads collection with the search results
       filterMyReads.forEach((rBook) => {
         let found = false
           books.forEach((book)=>{
@@ -68,7 +55,7 @@ class Search extends Component{
             }
           })
           if(!found){
-            books.unshift(rBook) //add the book in personal collection to search results
+            books.unshift(rBook) //add the rBook in personal collection to search results
           }
         })
          results = books
@@ -81,7 +68,7 @@ class Search extends Component{
   }
 
   render(){
-    const { query, results } = this.state
+    const { query, hits } = this.state
     //const { books, refreshBooks } = this.props
 
     return(
@@ -110,7 +97,7 @@ class Search extends Component{
       <div className="search-books-results">
 
       <ol className="books-grid">
-      {results !== undefined ? results.map(
+      {hits !== undefined ? hits.map(
         (b) => (
           <Book
             book={b}
