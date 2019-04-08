@@ -1,7 +1,17 @@
 # MyReads Project
 
+This application is a bookshelf app that allows the user to select and categorize books of their choice into 4 different categories, 3 of which are displayed on the Main page. 
+
+1. Currently Reading
+2. Want to Read
+3. Read
+4. None (Completely removing it from your shelf)
+
+The app also provides a search cabability to search for more books and add them to your categories. 
+
+## Why develop this App
 This project was developed to fulfill the final assessment project for Udacity's React
-Fundamentals course.  A starter template was provided which included a static example of the CSS and HTML markup which is being used for this project. However the starter template did not include any of the React Components needed to complete the project. The required interactivity to the app has been developed and added by refactoring the static code.
+Fundamentals course.  A starter template was provided which included a static example of the CSS and HTML markup which is being used for this project. However the starter template did not include any of the **React Components** needed to complete the project. **The required interactivity to the app has been developed and added by refactoring the static code.**
 
 
 ## Installation Instructions
